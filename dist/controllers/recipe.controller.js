@@ -136,7 +136,9 @@ const getRecipeById = (req, res, next) => __awaiter(void 0, void 0, void 0, func
 exports.getRecipeById = getRecipeById;
 const getRecipies = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const recipesData = yield RecipeModel_1.default.find({ userId: req.user.id });
+        const recipesData = yield RecipeModel_1.default.find({ userId: req.user.id }).sort({
+            createdAt: -1,
+        });
         if (!recipesData) {
             res.status(404).json({ message: "Recipe not found" });
             return;

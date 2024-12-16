@@ -154,7 +154,9 @@ export const getRecipies = async (
   next: NextFunction
 ) => {
   try {
-    const recipesData = await Recipe.find({ userId: req.user.id });
+    const recipesData = await Recipe.find({ userId: req.user.id }).sort({
+      createdAt: -1,
+    });
 
     if (!recipesData) {
       res.status(404).json({ message: "Recipe not found" });
